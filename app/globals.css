@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --foreground: #1a1a1a;
+  --background: #FDF2F4;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-montserrat), sans-serif;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-cormorant), serif;
+}
+
+@layer utilities {
+  .bg-gradient-gold {
+    background: linear-gradient(to right, #C9A86C, #D4AF37, #C9A86C);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(to right, #C9A86C, #D4AF37, #C9A86C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
