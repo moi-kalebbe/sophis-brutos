@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, Target, BarChart2, LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -27,9 +28,16 @@ export default function Sidebar() {
     const SidebarContent = () => (
         <div className="flex flex-col h-full bg-white border-r border-bg-secondary">
             {/* Header */}
-            <div className="p-6 border-b border-bg-secondary flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-accent-gold text-white flex items-center justify-center font-bold font-serif">S</div>
-                <span className="font-serif text-xl font-bold text-text-dark tracking-wide">Sophia Admin</span>
+            <div className="p-6 border-b border-bg-secondary flex justify-center">
+                <div className="relative w-[180px] h-[50px]">
+                    <Image
+                        src="/assets/logo.png"
+                        alt="Sophia Brutos Admin"
+                        fill
+                        className="object-contain"
+                        priority
+                    />
+                </div>
             </div>
 
             {/* Nav */}

@@ -1,4 +1,5 @@
 
+import Image from "next/image";
 import { MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -30,9 +31,13 @@ export default function Footer() {
 
                 {/* Column 3: Social/Brand */}
                 <div className="flex flex-col items-center md:items-end gap-4">
-                    <div className="text-right">
-                        <div className="font-serif text-2xl font-bold tracking-widest">SOPHIA</div>
-                        <div className="font-sans text-xs tracking-[0.4em] opacity-60">BRUTOS</div>
+                    <div className="relative w-[180px] h-[60px]">
+                        <Image
+                            src="/assets/logo.png"
+                            alt="Sophia Brutos Link"
+                            fill
+                            className="object-contain object-right"
+                        />
                     </div>
                     <p className="text-xs opacity-50 text-center md:text-right mt-auto">
                         © 2025 Sophia Brutos.<br />Todos os direitos reservados.

@@ -46,9 +46,14 @@ function LoginContent() {
         <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.05)] p-8 md:p-12 animate-fadeInUp">
             <div className="flex flex-col items-center mb-8 text-center">
                 {/* Logo placeholder */}
-                <div className="mb-4">
-                    <span className="font-serif text-3xl font-bold tracking-widest text-text-dark">SOPHIA</span>
-                    <span className="block font-sans text-xs tracking-[0.4em] text-text-medium mt-1">BRUTOS</span>
+                <div className="relative w-[200px] h-[80px] mb-4">
+                    <Image
+                        src="/assets/logo.png"
+                        alt="Sophia Brutos Logo"
+                        fill
+                        className="object-contain"
+                        priority
+                    />
                 </div>
                 <div className="w-[40px] h-[1px] bg-accent-gold mb-4" />
                 <h1 className="font-serif text-2xl text-text-dark">Painel Administrativo</h1>

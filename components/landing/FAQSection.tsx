@@ -10,7 +10,7 @@ const faqItems = [
     },
     {
         question: "Qual o pedido mínimo?",
-        answer: "O mínimo é de apenas 15 peças no total. Você pode variar modelos e quantidades como quiser."
+        answer: "O mínimo é de 5 peças de cada modelo. Você pode variar modelos e quantidades como quiser."
     },
     {
         question: "Vocês indicam onde dar o banho?",
@@ -18,7 +18,7 @@ const faqItems = [
     },
     {
         question: "Como funciona o envio?",
-        answer: "Enviamos para todo o Brasil via Correios ou Transportadora. O frete é calculado no fechamento do pedido."
+        answer: "Enviamos para todo o Brasil via Correios ou Transportadora. O frete é calculado no fechamento do pedido. Frete para Limeira ou entrega no seu banho é grátis."
     },
     {
         question: "As peças têm garantia?",

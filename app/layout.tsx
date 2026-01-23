@@ -68,7 +68,7 @@ const jsonLd = {
     "@type": "Organization",
     "name": "Sophia Brutos",
     "url": "https://sophiabrutos.space",
-    "logo": "https://sophiabrutos.space/icon.png",
+    "logo": "https://sophiabrutos.space/assets/logo.png",
     "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+55-19-99999-9999",
