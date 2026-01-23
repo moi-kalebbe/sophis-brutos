@@ -1,4 +1,5 @@
 
+import { Suspense } from "react";
 import Hero from "@/components/landing/Hero";
 import DifferenceSection from "@/components/landing/DifferenceSection";
 import IdealSection from "@/components/landing/IdealSection";
@@ -15,7 +16,9 @@ import { createClient } from "@/lib/supabase/client";
 export default function Home() {
     return (
         <main className="min-h-screen">
-            <Hero />
+            <Suspense fallback={null}>
+                <Hero />
+            </Suspense>
             <DifferenceSection />
             <IdealSection />
             <ProductsSection />
@@ -24,7 +27,9 @@ export default function Home() {
             <FactorySection />
             <TestimonialsSection />
             <FAQSection />
-            <FinalCTA />
+            <Suspense fallback={null}>
+                <FinalCTA />
+            </Suspense>
             <Footer />
         </main>
     );

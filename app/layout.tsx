@@ -32,7 +32,9 @@ export default function RootLayout({
     return (
         <html lang="pt-BR" className={`${montserrat.variable} ${cormorant.variable}`}>
             <body className={montserrat.className}>
-                <DynamicScripts />
+                <Suspense fallback={null}>
+                    <DynamicScripts />
+                </Suspense>
                 {children}
                 <Suspense fallback={null}>
                     <FloatingWhatsApp />
