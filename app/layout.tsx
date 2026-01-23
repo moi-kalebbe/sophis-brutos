@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import DynamicScripts from "@/components/DynamicScripts";
@@ -33,7 +34,9 @@ export default function RootLayout({
             <body className={montserrat.className}>
                 <DynamicScripts />
                 {children}
-                <FloatingWhatsApp />
+                <Suspense fallback={null}>
+                    <FloatingWhatsApp />
+                </Suspense>
             </body>
         </html>
     );
