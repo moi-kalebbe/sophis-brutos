@@ -11,7 +11,6 @@ import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import FAQSection from "@/components/landing/FAQSection";
 import FinalCTA from "@/components/landing/FinalCTA";
 import Footer from "@/components/landing/Footer";
-import { createClient } from "@/lib/supabase/client";
 
 export default function Home() {
     return (
