@@ -20,7 +20,9 @@ export default function Home() {
             </Suspense>
             <DifferenceSection />
             <IdealSection />
-            <ProductsSection />
+            <Suspense fallback={null}>
+                <ProductsSection />
+            </Suspense>
             <BenefitsSection />
             <VideoSection />
             <FactorySection />
