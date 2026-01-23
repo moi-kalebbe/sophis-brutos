@@ -11,6 +11,7 @@ export default function FactorySection() {
                     alt="Factory Background"
                     fill
                     className="object-cover opacity-20"
+                    sizes="100vw"
                 />
             </div>
 
@@ -77,6 +78,7 @@ export default function FactorySection() {
                                 alt={`Produção Sophia Brutos ${i + 1}`}
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                sizes="(max-width: 768px) 100vw, 33vw"
                             />
                         </div>
                     ))}

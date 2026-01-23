@@ -19,6 +19,7 @@ export default function DifferenceSection() {
                                 alt="Semijoia folheada"
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         </div>
                         <h3 className="font-serif text-3xl mb-4 text-text-dark">
@@ -39,6 +40,7 @@ export default function DifferenceSection() {
                                 alt="Semijoia no bruto"
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         </div>
                         <h3 className="font-serif text-3xl mb-4 text-text-dark">
