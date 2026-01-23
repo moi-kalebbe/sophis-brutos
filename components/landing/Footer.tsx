@@ -40,7 +40,7 @@ export default function Footer() {
                         />
                     </div>
                     <p className="text-xs opacity-50 text-center md:text-right mt-auto">
-                        © 2025 Sophia Brutos.<br />Todos os direitos reservados.
+                        © 2026 Sophia Brutos.<br />Todos os direitos reservados.
                     </p>
                 </div>
             </div>
