@@ -1,16 +1,30 @@
 
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useUTMTracking } from "@/hooks/use-utm-tracking";
+import { useWhatsAppQualification } from "@/hooks/use-whatsapp-qualification";
+import WhatsAppQualificationModal from "@/components/ui/WhatsAppQualificationModal";
 
 const products = [
-    { src: "/assets/img/72f424d5cfd6e4c620d3d90aeb5c10f7.webp", alt: "Anéis Semijoia" },
-    { src: "/assets/img/756a8aa793e9d3c7046f36325c05cf90.webp", alt: "Colares" },
-    { src: "/assets/img/1f497626dfd37115e52fc9b50e2fcf03.webp", alt: "Brincos" },
-    { src: "/assets/img/7d282ad66fe4181aae20f122779cc74b.webp", alt: "Correntes" },
-    { src: "/assets/img/ad006ab724c390e3d5e77af00592b508.webp", alt: "Pingentes" },
-    { src: "/assets/img/a30f04518d5142bd25e343abb711a57c.webp", alt: "Conjunto" },
+    // Fila 1: Branca | Branca
+    { src: "/assets/img/conjunto-folha-marquise.jpg", alt: "Conjunto Folha Marquise" },
+    { src: "/assets/img/conjunto-barras-geometricas.jpg", alt: "Conjunto Barras Minimalista" },
+
+    // Fila 2: Negra | Negra
+    { src: "/assets/img/conjunto-perolas-classico.jpg", alt: "Conjunto Pérolas Clássico" },
+    { src: "/assets/img/colares-camadas-minimalista.jpg", alt: "Colares em Camadas" },
+
+    // Fila 3: Branca | Branca
+    { src: "/assets/img/conjunto-estrelas-brinco.jpg", alt: "Conjunto Estrelas" },
+    { src: "/assets/img/colares-geometricos-camadas.jpg", alt: "Colares Geométricos" },
 ];
 
 export default function ProductsSection() {
+    const { trackClick } = useUTMTracking();
+    const { isModalOpen, pendingSource, openQualificationModal, closeModal, confirmAndRedirect } = useWhatsAppQualification();
+
     return (
         <section className="py-20 px-5 bg-white">
             <div className="max-w-6xl mx-auto">
@@ -20,9 +34,13 @@ export default function ProductsSection() {
                 </h2>
                 <p className="text-center text-text-medium mb-12">Mix pronto para lojista — do básico ao destaque</p>
 
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+                <div className="grid grid-cols-2 gap-6 md:gap-10 mb-12">
                     {products.map((product, index) => (
-                        <div key={index} className="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-bg-secondary to-bg-primary shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
+                        <button
+                            key={index}
+                            onClick={() => openQualificationModal(`Produto Grid - ${product.alt}`)}
+                            className="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-bg-secondary to-bg-primary shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer text-left w-full"
+                        >
                             <Image
                                 src={product.src}
                                 alt={product.alt}
@@ -35,16 +53,26 @@ export default function ProductsSection() {
                                     Ver Detalhes
                                 </span>
                             </div>
-                        </div>
+                        </button>
                     ))}
                 </div>
 
                 <div className="text-center">
-                    <a href="https://wa.link/1nxmx6" target="_blank" className="inline-block text-accent-gold font-semibold border-b border-accent-gold pb-1 hover:opacity-80 transition-opacity">
+                    <button
+                        onClick={() => openQualificationModal("Ver Catálogo Completo - ProductsSection")}
+                        className="inline-block text-accent-gold font-semibold border-b border-accent-gold pb-1 hover:opacity-80 transition-opacity cursor-pointer"
+                    >
                         Ver catálogo completo →
-                    </a>
+                    </button>
                 </div>
             </div>
+
+            <WhatsAppQualificationModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                onConfirm={confirmAndRedirect}
+                source={pendingSource}
+            />
         </section>
     );
 }

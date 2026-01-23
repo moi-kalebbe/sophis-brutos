@@ -14,9 +14,9 @@ export default function TestimonialsSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Testimonial 1 */}
-                    <div className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                        <div className="absolute top-8 right-8 text-accent-gold/20 group-hover:text-accent-gold/40 transition-colors duration-300">
-                            <Quote className="w-12 h-12" />
+                    <div className="relative bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div className="absolute top-8 right-8 text-gray-300/30 group-hover:text-gray-400/40 transition-colors duration-300">
+                            <Quote className="w-8 h-8" />
                         </div>
                         <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
                             "Abandonei o folheado pronto depois que conheci a Sophia. Compro no bruto, dou meu banho e minha margem dobrou. A peça sai muito mais em conta."
@@ -29,9 +29,9 @@ export default function TestimonialsSection() {
                     </div>
 
                     {/* Testimonial 2 */}
-                    <div className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                        <div className="absolute top-8 right-8 text-accent-gold/20 group-hover:text-accent-gold/40 transition-colors duration-300">
-                            <Quote className="w-12 h-12" />
+                    <div className="relative bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div className="absolute top-8 right-8 text-gray-300/30 group-hover:text-gray-400/40 transition-colors duration-300">
+                            <Quote className="w-8 h-8" />
                         </div>
                         <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
                             "A principal diferença pra mim é a reposição. Quando uma peça vende bem, eu ligo e eles têm no estoque ou fabricam rápido. Não perco venda."
@@ -44,9 +44,9 @@ export default function TestimonialsSection() {
                     </div>
 
                     {/* Testimonial 3 */}
-                    <div className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                        <div className="absolute top-8 right-8 text-accent-gold/20 group-hover:text-accent-gold/40 transition-colors duration-300">
-                            <Quote className="w-12 h-12" />
+                    <div className="relative bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div className="absolute top-8 right-8 text-gray-300/30 group-hover:text-gray-400/40 transition-colors duration-300">
+                            <Quote className="w-8 h-8" />
                         </div>
                         <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
                             "As peças são leves e o acabamento do latão é impecável. Meu banhista sempre elogia a qualidade da fundição. Recomendo demais."

@@ -7,7 +7,7 @@ export default function IdealSection() {
             <div className="max-w-5xl mx-auto">
                 <div className="w-[60px] h-[1px] bg-accent-gold mb-5 mx-auto" />
                 <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-10 text-text-dark">
-                    O Bruto é para o seu negócio?
+                    O <span className="inline-block bg-gradient-to-r from-accent-gold/30 to-accent-gold/20 px-2 py-0.5 rounded font-bold text-accent-gold border border-accent-gold/40">BRUTO</span> é para o seu negócio?
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">

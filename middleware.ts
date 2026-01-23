@@ -1,6 +1,9 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+// Email autorizado para acessar o super admin
+const AUTHORIZED_ADMIN_EMAIL = 'trabalhosmktsophia@gmail.com';
+
 export default async function middleware(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
         request,
@@ -46,7 +49,7 @@ export default async function middleware(request: NextRequest) {
             data: { user },
         } = await supabase.auth.getUser()
 
-        // Protect admin routes
+        // Protect admin routes - require authentication
         if (request.nextUrl.pathname.startsWith('/admin') &&
             !request.nextUrl.pathname.startsWith('/admin/login') &&
             !user) {
@@ -55,11 +58,31 @@ export default async function middleware(request: NextRequest) {
             return NextResponse.redirect(url)
         }
 
-        // Redirect to dashboard if logged in and trying to access login
-        if (request.nextUrl.pathname.startsWith('/admin/login') && user) {
+        // Check if user is authorized super admin
+        if (request.nextUrl.pathname.startsWith('/admin') &&
+            !request.nextUrl.pathname.startsWith('/admin/login') &&
+            user &&
+            user.email !== AUTHORIZED_ADMIN_EMAIL) {
+            // User is logged in but not authorized - sign them out and redirect
+            await supabase.auth.signOut();
+            const url = request.nextUrl.clone()
+            url.pathname = '/admin/login'
+            url.searchParams.set('error', 'unauthorized')
+            return NextResponse.redirect(url)
+        }
+
+        // Redirect to dashboard if authorized admin is trying to access login
+        if (request.nextUrl.pathname.startsWith('/admin/login') &&
+            user &&
+            user.email === AUTHORIZED_ADMIN_EMAIL) {
             const url = request.nextUrl.clone()
             url.pathname = '/admin/dashboard'
             return NextResponse.redirect(url)
+        }
+
+        // If user is on login page but not authorized, allow access to show error
+        if (request.nextUrl.pathname.startsWith('/admin/login')) {
+            return supabaseResponse;
         }
 
         return supabaseResponse

@@ -22,7 +22,6 @@ export default function Sidebar() {
     const navItems = [
         { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
         { name: "Pixels & Scripts", href: "/admin/pixels", icon: Target },
-        { name: "Analytics", href: "/admin/analytics", icon: BarChart2 },
     ];
 
     const SidebarContent = () => (
@@ -43,8 +42,8 @@ export default function Sidebar() {
                             href={item.href}
                             onClick={() => setIsOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
-                                    ? "bg-bg-secondary text-text-dark font-semibold"
-                                    : "text-text-medium hover:bg-bg-primary hover:text-text-dark"
+                                ? "bg-bg-secondary text-text-dark font-semibold"
+                                : "text-text-medium hover:bg-bg-primary hover:text-text-dark"
                                 }`}
                         >
                             <item.icon className={`w-5 h-5 ${isActive ? "text-accent-gold" : "opacity-70"}`} />

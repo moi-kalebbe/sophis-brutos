@@ -30,7 +30,7 @@ export default function BenefitsSection() {
             <div className="max-w-6xl mx-auto">
                 <div className="w-[60px] h-[1px] bg-accent-gold mb-5 mx-auto" />
                 <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-12 text-text-dark">
-                    Por que comprar no bruto?
+                    Por que comprar no <span className="inline-block bg-gradient-to-r from-accent-gold/30 to-accent-gold/20 px-2 py-0.5 rounded font-bold text-accent-gold border border-accent-gold/40">BRUTO</span>?
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
