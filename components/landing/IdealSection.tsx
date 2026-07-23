@@ -1,50 +1,61 @@
-const ideal = [
-    "Já tem loja ou revenda e quer aumentar a margem.",
-    "Quer criar uma coleção com sua própria assinatura.",
-    "Busca fornecedor com reposição constante.",
-    "Tem parceiro de galvanoplastia ou quer indicação.",
-];
-
-const notIdeal = [
-    "Busca apenas 1 ou 2 peças para uso pessoal.",
-    "Quer a peça pronta, já banhada, imediatamente.",
-    "Não tem interesse em gerenciar o processo de banho.",
-];
 
 export default function IdealSection() {
     return (
-        <section className="bg-[var(--sb-ivory)] px-5 py-28 md:py-40">
-            <div className="sb-shell">
-                <div data-reveal className="grid gap-8 border-b border-[var(--sb-line)] pb-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
-                    <p className="sb-kicker">Uma escolha de negócio</p>
-                    <h2 className="sb-title max-w-4xl">
-                        O bruto é para quem quer mais controle sobre a própria coleção.
-                    </h2>
-                </div>
+        <section className="py-20 px-5 bg-bg-primary">
+            <div className="max-w-5xl mx-auto">
+                <div className="w-[60px] h-[1px] bg-accent-gold mb-5 mx-auto" />
+                <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-10 text-text-dark">
+                    O <span className="inline-block bg-gradient-to-r from-accent-gold/30 to-accent-gold/20 px-2 py-0.5 rounded font-bold text-accent-gold border border-accent-gold/40">BRUTO</span> é para o seu negócio?
+                </h2>
 
-                <div className="grid lg:grid-cols-2">
-                    <article data-reveal className="border-b border-[var(--sb-line)] py-12 lg:border-b-0 lg:border-r lg:pr-14">
-                        <p className="mb-8 text-xs font-bold uppercase tracking-[0.18em] text-[var(--sb-terracotta)]">Faz sentido para você se</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    {/* Card Yes */}
+                    <div className="p-10 rounded-3xl bg-white shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-green-50/50">
+                        <h3 className="font-serif text-2xl md:text-3xl mb-8 text-[#2e7d32] flex items-center gap-3">
+                            Ideal para você que:
+                        </h3>
                         <ul className="space-y-6">
-                            {ideal.map((item, index) => (
-                                <li key={item} className="grid grid-cols-[2rem_1fr] gap-4 text-lg leading-relaxed text-[var(--sb-cocoa)]">
-                                    <span className="font-serif text-2xl italic text-[var(--sb-clay)]">{String(index + 1).padStart(2, "0")}</span>
+                            {[
+                                "Já tem loja ou revenda e quer aumentar a margem.",
+                                "Quer criar uma coleção com sua própria assinatura.",
+                                "Busca fornecedor com reposição constante.",
+                                "Tem parceiro de galvanoplastia (banho) ou quer indicação."
+                            ].map((item, i) => (
+                                <li key={i} className="relative pl-10 text-text-medium leading-relaxed text-lg">
+                                    <span className="absolute left-0 top-1">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                    </span>
                                     {item}
                                 </li>
                             ))}
                         </ul>
-                    </article>
+                    </div>
 
-                    <article data-reveal className="py-12 lg:pl-14">
-                        <p className="mb-8 text-xs font-bold uppercase tracking-[0.18em] text-[var(--sb-ink-soft)]">Talvez não seja o momento se</p>
+                    {/* Card No */}
+                    <div className="p-10 rounded-3xl bg-white shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-red-50/50">
+                        <h3 className="font-serif text-2xl md:text-3xl mb-8 text-[#c62828] flex items-center gap-3">
+                            Não é para você se:
+                        </h3>
                         <ul className="space-y-6">
-                            {notIdeal.map((item) => (
-                                <li key={item} className="border-l border-[var(--sb-blush-deep)] pl-6 text-lg leading-relaxed text-[var(--sb-ink-soft)]">
+                            {[
+                                "Busca apenas 1 ou 2 peças para uso pessoal.",
+                                "Quer a peça pronta (já banhada) imediatamente.",
+                                "Não tem interesse em gerenciar o processo de banho."
+                            ].map((item, i) => (
+                                <li key={i} className="relative pl-10 text-text-medium leading-relaxed text-lg">
+                                    <span className="absolute left-0 top-1">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#c62828" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                    </span>
                                     {item}
                                 </li>
                             ))}
                         </ul>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>

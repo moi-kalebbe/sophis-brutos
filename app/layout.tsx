@@ -1,13 +1,19 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Montserrat, Outfit } from "next/font/google";
 import DynamicScripts from "@/components/DynamicScripts";
-import FloatingWhatsApp from "@/components/landing/FloatingWhatsApp";
+import LandingFloatingWhatsApp from "@/components/LandingFloatingWhatsApp";
 import "./v2-globals.css";
 
 const outfit = Outfit({
     subsets: ["latin"],
     variable: "--font-outfit",
+    display: "swap",
+});
+
+const montserrat = Montserrat({
+    subsets: ["latin"],
+    variable: "--font-montserrat",
     display: "swap",
 });
 
@@ -57,7 +63,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="pt-BR" className={`${outfit.variable} ${cormorant.variable}`}>
+        <html lang="pt-BR" className={`${outfit.variable} ${montserrat.variable} ${cormorant.variable}`}>
             <body className={outfit.className}>
                 <Suspense fallback={null}>
                     <DynamicScripts />
@@ -68,7 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 />
                 {children}
                 <Suspense fallback={null}>
-                    <FloatingWhatsApp />
+                    <LandingFloatingWhatsApp />
                 </Suspense>
             </body>
         </html>

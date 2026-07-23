@@ -3,6 +3,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 interface Settings {
@@ -17,6 +18,8 @@ interface Settings {
 
 export default function DynamicScripts() {
     const [settings, setSettings] = useState<Settings | null>(null);
+    const pathname = usePathname();
+    const pageVersion = pathname.startsWith("/lp2") ? "LP2" : "LP1";
 
     useEffect(() => {
         async function fetchSettings() {
@@ -53,7 +56,7 @@ export default function DynamicScripts() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${settings.facebook_pixel_id}');
-            fbq('track', 'PageView');
+            fbq('track', 'PageView', { page_version: '${pageVersion}' });
           `}
                 </Script>
             )}
@@ -70,7 +73,10 @@ export default function DynamicScripts() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${settings.google_analytics_id}');
+              gtag('config', '${settings.google_analytics_id}', {
+                page_path: '${pathname}',
+                page_version: '${pageVersion}'
+              });
             `}
                     </Script>
                 </>
@@ -83,7 +89,10 @@ export default function DynamicScripts() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${settings.google_ads_id}');
+              gtag('config', '${settings.google_ads_id}', {
+                page_path: '${pathname}',
+                page_version: '${pageVersion}'
+              });
            `}
                 </Script>
             )}
@@ -92,12 +101,20 @@ export default function DynamicScripts() {
             {settings.custom_scripts && <CustomScriptRunner scriptHtml={settings.custom_scripts} />}
 
             {/* Scroll Tracking (50%) */}
-            {settings.facebook_active && <ScrollTracker />}
+            {settings.facebook_active && (
+                <ScrollTracker pathname={pathname} pageVersion={pageVersion} />
+            )}
         </>
     );
 }
 
-function ScrollTracker() {
+function ScrollTracker({
+    pathname,
+    pageVersion,
+}: {
+    pathname: string;
+    pageVersion: "LP1" | "LP2";
+}) {
     useEffect(() => {
         let fired = false;
         const handleScroll = () => {
@@ -108,7 +125,11 @@ function ScrollTracker() {
                     fbq?: (action: string, event: string, payload: Record<string, string>) => void;
                 };
                 if (pixelWindow.fbq) {
-                    pixelWindow.fbq("trackCustom", "ScrollDepth", { depth: "50%" });
+                    pixelWindow.fbq("trackCustom", "ScrollDepth", {
+                        depth: "50%",
+                        page_path: pathname,
+                        page_version: pageVersion,
+                    });
                 }
                 fired = true;
                 window.removeEventListener("scroll", handleScroll);
@@ -116,7 +137,7 @@ function ScrollTracker() {
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [pageVersion, pathname]);
 
     return null;
 }

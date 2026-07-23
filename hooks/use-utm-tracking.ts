@@ -27,14 +27,17 @@ export function useUTMTracking() {
         const userAgent = navigator.userAgent;
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
         const deviceType = isMobile ? "mobile" : "desktop";
+        const pageVersion = window.location.pathname.startsWith("/lp2") ? "LP2" : "LP1";
+        const trackedLocation = `${pageVersion} | ${location || "unknown"}`;
         const pixelWindow = window as typeof window & {
             fbq?: (action: string, event: string, payload: Record<string, string>) => void;
         };
 
         if (pixelWindow.fbq) {
             pixelWindow.fbq("track", "Contact", {
-                content_name: location || "unknown_button",
+                content_name: trackedLocation,
                 content_category: "WhatsApp Lead",
+                page_version: pageVersion,
             });
         }
 
@@ -53,7 +56,7 @@ export function useUTMTracking() {
                 utm_campaign: utms.utm_campaign,
                 utm_term: utms.utm_term,
                 utm_content: utms.utm_content,
-                button_location: location || "unknown",
+                button_location: trackedLocation,
                 user_agent: userAgent,
                 referrer: document.referrer,
                 page_url: window.location.href,

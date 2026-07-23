@@ -1,43 +1,49 @@
+
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="bg-[var(--sb-cocoa)] px-5 py-14 text-[var(--sb-ivory)]">
-            <div className="sb-shell grid gap-12 border-b border-white/12 pb-12 md:grid-cols-[1fr_1fr_0.8fr]">
-                <div>
-                    <div className="flex items-center gap-2 text-[var(--sb-champagne)]">
-                        <MapPin className="h-5 w-5" />
-                        <span className="font-serif text-2xl">Limeira/SP</span>
+        <footer className="bg-[#1a1a1a] text-white py-12 px-5 border-t border-white/10">
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center md:text-left">
+
+                {/* Column 1: Contact/Location */}
+                <div className="flex flex-col items-center md:items-start gap-4">
+                    <div className="flex items-center gap-2 text-xl font-serif text-accent-gold">
+                        <MapPin className="w-5 h-5" />
+                        <span>Limeira/SP</span>
                     </div>
-                    <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-                        Capital das semijoias. Lojas no Shopping Boulevard e na Avenida Costa e Silva.
+                    <p className="text-sm opacity-80 font-light">
+                        Capital das Semijoias<br />
+                        Duas lojas físicas:<br />
+                        Shopping Boulevard e Costa e Silva
                     </p>
                 </div>
 
-                <div>
-                    <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--sb-champagne)]">Atendimento</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-white/60">
-                        Segunda a quinta, das 8h às 18h<br />
-                        Sexta, das 8h às 17h
-                    </p>
+                {/* Column 2: Hours */}
+                <div className="flex flex-col items-center md:items-start gap-4">
+                    <h4 className="text-lg font-serif text-accent-gold">Horário de Atendimento</h4>
+                    <div className="space-y-1 text-sm opacity-80 font-light">
+                        <p>Segunda a Quinta: 8h às 18h</p>
+                        <p>Sexta-feira: 8h às 17h</p>
+                    </div>
                 </div>
 
-                <div className="md:text-right">
-                    <div className="relative h-16 w-44 md:ml-auto">
+                {/* Column 3: Social/Brand */}
+                <div className="flex flex-col items-center md:items-end gap-4">
+                    <div className="relative w-[180px] h-[60px]">
                         <Image
                             src="/assets/logo.png"
-                            alt="Sophia Brutos"
+                            alt="Sophia Brutos Link"
                             fill
-                            sizes="176px"
-                            className="object-contain object-left brightness-0 invert md:object-right"
+                            sizes="180px"
+                            className="object-contain object-right"
                         />
                     </div>
+                    <p className="text-xs opacity-50 text-center md:text-right mt-auto">
+                        © 2026 Sophia Brutos.<br />Todos os direitos reservados.
+                    </p>
                 </div>
-            </div>
-            <div className="sb-shell flex flex-col gap-3 pt-6 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
-                <p>© 2026 Sophia Brutos. Todos os direitos reservados.</p>
-                <p>Semijoias no bruto direto da indústria.</p>
             </div>
         </footer>
     );
