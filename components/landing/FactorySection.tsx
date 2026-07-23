@@ -113,36 +113,56 @@ export default function FactorySection() {
                     </div>
                 </div>
 
-                <div className="mb-8 text-center">
-                    <span className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C9A86C]">
-                        Detalhes da produção
-                    </span>
+                <div className="mx-auto mb-10 max-w-3xl text-center">
+                    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#C9A86C]">
+                        Indústria, atacado e entrega
+                    </p>
+                    <h3 className="text-balance font-serif text-3xl font-semibold leading-tight text-white md:text-5xl">
+                        Do bruto ao seu sucesso.
+                    </h3>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                     {[
                         {
-                            src: "/assets/img/factory-bruto-tray.webp",
-                            alt: "Bandeja com componentes de semijoias no bruto",
+                            src: "/assets/img/factory-producao-sophia.webp",
+                            alt: "Equipe da Sophia Brutos na linha de produção própria",
+                            title: "Nós produzimos",
+                            description:
+                                "Fábrica própria com produção em larga escala e alto padrão de qualidade.",
                         },
                         {
-                            src: "/assets/img/factory-bruto-collection.webp",
-                            alt: "Coleção de semijoias no bruto em composição editorial",
+                            src: "/assets/img/factory-atacado-sophia.webp",
+                            alt: "Peças no bruto e pedidos de atacado da Sophia Brutos",
+                            title: "Vendemos no atacado",
+                            description:
+                                "Peças no bruto para você criar sua coleção e aumentar sua margem.",
                         },
                         {
-                            src: "/assets/img/factory-envio-brasil.webp",
-                            alt: "Pedidos de semijoias no bruto preparados para envio ao Brasil",
+                            src: "/assets/img/factory-envio-sophia.webp",
+                            alt: "Caixa da Sophia Brutos preparada para envio",
+                            title: "Enviamos para todo o Brasil",
+                            description:
+                                "Pedidos preparados com segurança e agilidade para todo o país.",
                         },
-                    ].map(({ src, alt }) => (
-                        <div key={src} className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-accent-gold/30 bg-white/10">
-                            <Image
-                                src={src}
-                                alt={alt}
-                                fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                sizes="(max-width: 768px) 100vw, 33vw"
-                            />
-                        </div>
+                    ].map(({ src, alt, title, description }) => (
+                        <article key={src} className="group">
+                            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-accent-gold/30 bg-white/10">
+                                <Image
+                                    src={src}
+                                    alt={alt}
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                />
+                            </div>
+                            <h4 className="mt-5 font-serif text-2xl font-semibold text-[#C9A86C]">
+                                {title}
+                            </h4>
+                            <p className="mt-2 max-w-[36ch] text-sm leading-relaxed text-white/65">
+                                {description}
+                            </p>
+                        </article>
                     ))}
                 </div>
             </div>
