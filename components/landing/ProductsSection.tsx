@@ -1,68 +1,73 @@
-
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useUTMTracking } from "@/hooks/use-utm-tracking";
-import { useWhatsAppQualification } from "@/hooks/use-whatsapp-qualification";
 import WhatsAppQualificationModal from "@/components/ui/WhatsAppQualificationModal";
+import { useWhatsAppQualification } from "@/hooks/use-whatsapp-qualification";
 
 const products = [
-    // Fila 1: Branca | Branca
-    { src: "/assets/img/conjunto-folha-marquise.jpg", alt: "Conjunto Folha Marquise" },
-    { src: "/assets/img/conjunto-barras-geometricas.jpg", alt: "Conjunto Barras Minimalista" },
-
-    // Fila 2: Negra | Negra
-    { src: "/assets/img/conjunto-perolas-classico.jpg", alt: "Conjunto Pérolas Clássico" },
-    { src: "/assets/img/colares-camadas-minimalista.jpg", alt: "Colares em Camadas" },
-
-    // Fila 3: Branca | Branca
-    { src: "/assets/img/conjunto-estrelas-brinco.jpg", alt: "Conjunto Estrelas" },
-    { src: "/assets/img/colares-geometricos-camadas.jpg", alt: "Colares Geométricos" },
+    { src: "/assets/img/conjunto-folha-marquise.jpg", alt: "Conjunto Folha Marquise", span: "md:col-span-2 md:row-span-2" },
+    { src: "/assets/img/conjunto-barras-geometricas.jpg", alt: "Conjunto Barras Minimalista", span: "" },
+    { src: "/assets/img/conjunto-perolas-classico.jpg", alt: "Conjunto Pérolas Clássico", span: "" },
+    { src: "/assets/img/colares-camadas-minimalista.jpg", alt: "Colares em Camadas", span: "md:col-span-2" },
+    { src: "/assets/img/conjunto-estrelas-brinco.jpg", alt: "Conjunto Estrelas", span: "" },
+    { src: "/assets/img/colares-geometricos-camadas.jpg", alt: "Colares Geométricos", span: "" },
 ];
 
 export default function ProductsSection() {
-    const { trackClick } = useUTMTracking();
-    const { isModalOpen, pendingSource, openQualificationModal, closeModal, confirmAndRedirect } = useWhatsAppQualification();
+    const {
+        isModalOpen,
+        pendingSource,
+        openQualificationModal,
+        closeModal,
+        confirmAndRedirect,
+    } = useWhatsAppQualification();
 
     return (
-        <section className="py-20 px-5 bg-white">
-            <div className="max-w-6xl mx-auto">
-                <div className="w-[60px] h-[1px] bg-accent-gold mb-5 mx-auto" />
-                <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-3 text-text-dark">
-                    Peças vendáveis o ano todo (atemporais)
-                </h2>
-                <p className="text-center text-text-medium mb-12">Mix pronto para lojista, do básico ao destaque.</p>
+        <section id="colecao" className="bg-[var(--sb-cocoa)] px-5 py-28 text-[var(--sb-ivory)] md:py-40">
+            <div className="sb-shell">
+                <div data-reveal className="mb-14 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+                    <div>
+                        <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[var(--sb-champagne)]">Mix pronto para lojista</p>
+                        <h2 className="max-w-4xl font-serif text-5xl font-semibold leading-[0.95] tracking-[-0.035em] md:text-7xl">
+                            Peças atemporais para compor uma coleção que vende.
+                        </h2>
+                    </div>
+                    <p className="max-w-[42ch] text-base leading-relaxed text-white/62 lg:justify-self-end">
+                        Do básico ao destaque, escolha os modelos que combinam com a identidade da sua loja.
+                    </p>
+                </div>
 
-                <div className="grid grid-cols-2 gap-6 md:gap-10 mb-12">
-                    {products.map((product, index) => (
+                <div className="grid auto-rows-[180px] grid-flow-dense grid-cols-2 gap-2 md:auto-rows-[260px] md:grid-cols-4">
+                    {products.map((product) => (
                         <button
-                            key={index}
+                            type="button"
+                            key={product.src}
                             onClick={() => openQualificationModal(`Produto Grid - ${product.alt}`)}
-                            className="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-bg-secondary to-bg-primary shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer text-left w-full"
+                            className={`group relative overflow-hidden bg-[var(--sb-blush)] text-left ${product.span}`}
+                            aria-label={`Consultar ${product.alt}`}
                         >
                             <Image
                                 src={product.src}
                                 alt={product.alt}
                                 fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                className="object-cover transition duration-700 ease-out group-hover:scale-105 group-hover:brightness-75"
                                 sizes="(max-width: 768px) 50vw, 33vw"
                             />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="bg-white/10 backdrop-blur-md text-white px-6 py-2 rounded-full font-medium tracking-wide uppercase text-sm border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                    Ver Detalhes
-                                </span>
-                            </div>
+                            <span className="absolute inset-x-0 bottom-0 translate-y-full bg-[var(--sb-cocoa)]/82 px-4 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition duration-500 group-hover:translate-y-0">
+                                {product.alt}
+                            </span>
                         </button>
                     ))}
                 </div>
 
-                <div className="text-center">
+                <div data-reveal className="mt-10 flex flex-col items-start justify-between gap-6 border-t border-white/15 pt-8 sm:flex-row sm:items-center">
+                    <p className="font-serif text-2xl italic text-white/75">Veja o catálogo completo e monte seu primeiro pedido.</p>
                     <button
+                        type="button"
                         onClick={() => openQualificationModal("Ver Catálogo Completo - ProductsSection")}
-                        className="inline-block text-accent-gold font-semibold border-b border-accent-gold pb-1 hover:opacity-80 transition-opacity cursor-pointer"
+                        className="rounded-full border border-[var(--sb-champagne)] px-6 py-3 text-xs font-bold uppercase tracking-[0.13em] text-[var(--sb-champagne)] transition hover:bg-[var(--sb-champagne)] hover:text-[var(--sb-cocoa)]"
                     >
-                        Ver catálogo completo →
+                        Abrir catálogo
                     </button>
                 </div>
             </div>

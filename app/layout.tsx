@@ -1,101 +1,64 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Montserrat, Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond, Outfit } from "next/font/google";
 import DynamicScripts from "@/components/DynamicScripts";
 import FloatingWhatsApp from "@/components/landing/FloatingWhatsApp";
-import "./globals.css";
+import "./v2-globals.css";
 
-const montserrat = Montserrat({
+const outfit = Outfit({
     subsets: ["latin"],
-    variable: "--font-montserrat",
-    display: 'swap',
+    variable: "--font-outfit",
+    display: "swap",
 });
 
 const cormorant = Cormorant_Garamond({
     subsets: ["latin"],
     weight: ["400", "500", "600", "700"],
     variable: "--font-cormorant",
-    display: 'swap',
-    style: ['normal', 'italic'],
+    display: "swap",
+    style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://sophiabrutos.space'),
+    metadataBase: new URL("https://sophiabrutos.com.br"),
     title: {
-        default: "Sophia Brutos | Semijoias no Bruto Direto da Fábrica",
-        template: "%s | Sophia Brutos"
+        default: "Sophia Brutos | Semijoias no bruto direto da indústria",
+        template: "%s | Sophia Brutos",
     },
-    description: "Produção própria em Limeira. Semijoias no bruto com reposição garantida e margem de lucro real para lojistas.",
-    keywords: ["semijoias", "bruto", "limeira", "atacado", "fábrica", "revenda", "lucro", "joias"],
-    authors: [{ name: "Sophia Brutos" }],
+    description:
+        "Produção própria em Limeira. Semijoias no bruto com reposição garantida e margem de lucro real para lojistas.",
+    keywords: ["semijoias", "bruto", "Limeira", "atacado", "fábrica", "revenda", "joias"],
     openGraph: {
-        type: 'website',
-        locale: 'pt_BR',
-        url: 'https://sophiabrutos.space',
-        title: "Sophia Brutos | Semijoias no Bruto Direto da Fábrica",
-        description: "Produção própria em Limeira. Semijoias no bruto com reposição garantida e margem de lucro real para lojistas.",
+        type: "website",
+        locale: "pt_BR",
+        url: "https://sophiabrutos.com.br",
+        title: "Sophia Brutos | Semijoias no bruto direto da indústria",
+        description:
+            "Produção própria em Limeira, reposição garantida e envio para todo o Brasil.",
         siteName: "Sophia Brutos",
-        images: [
-            {
-                url: '/opengraph-image.png',
-                width: 1200,
-                height: 630,
-                alt: 'Sophia Brutos - Semijoias no Bruto',
-            }
-        ],
+        images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Sophia Brutos" }],
     },
-    twitter: {
-        card: 'summary_large_image',
-        title: "Sophia Brutos | Semijoias no Bruto Direto da Fábrica",
-        description: "Produção própria em Limeira. Semijoias no bruto com reposição garantida e margem de lucro real para lojistas.",
-        images: ['/twitter-image.png'],
-    },
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-            index: true,
-            follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
-        },
-    },
+    robots: { index: true, follow: true },
 };
 
 const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Sophia Brutos",
-    "url": "https://sophiabrutos.space",
-    "logo": "https://sophiabrutos.space/assets/logo.png",
-    "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+55-19-99999-9999",
-        "contactType": "sales",
-        "areaServed": "BR",
-        "availableLanguage": "Portuguese"
-    },
-    "address": {
+    name: "Sophia Brutos",
+    url: "https://sophiabrutos.com.br",
+    logo: "https://sophiabrutos.com.br/assets/logo.png",
+    address: {
         "@type": "PostalAddress",
-        "addressLocality": "Limeira",
-        "addressRegion": "SP",
-        "addressCountry": "BR"
+        addressLocality: "Limeira",
+        addressRegion: "SP",
+        addressCountry: "BR",
     },
-    "sameAs": [
-        "https://www.instagram.com/sophiabrutos",
-        "https://www.facebook.com/sophiabrutos"
-    ]
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="pt-BR" className={`${montserrat.variable} ${cormorant.variable}`}>
-            <body className={montserrat.className}>
+        <html lang="pt-BR" className={`${outfit.variable} ${cormorant.variable}`}>
+            <body className={outfit.className}>
                 <Suspense fallback={null}>
                     <DynamicScripts />
                 </Suspense>

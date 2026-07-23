@@ -1,56 +1,73 @@
+"use client";
 
-import { DollarSign, Award, Truck, ShieldCheck } from "lucide-react";
+import { useState } from "react";
 
 const benefits = [
     {
-        svgPath: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />,
+        number: "01",
         title: "Margem até 3x maior",
-        description: "Paga menos na peça base, vende pelo mesmo preço do mercado. O lucro fica no seu bolso."
+        description: "Paga menos na peça base, vende pelo mesmo preço do mercado. O lucro fica no seu bolso.",
     },
     {
-        svgPath: <><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>,
-        title: "Sua Coleção, Sua Regra",
-        description: "Dê o acabamento que quiser: Ródio, Ouro 18k, Prata. Você define o padrão da sua marca."
+        number: "02",
+        title: "Sua coleção, sua regra",
+        description: "Escolha entre ródio, ouro 18k ou prata e defina o padrão da sua marca.",
     },
     {
-        svgPath: <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />,
-        title: "Reposição Garantida",
-        description: "Somos indústria. O modelo que vendeu bem hoje estará disponível para reposição amanhã."
+        number: "03",
+        title: "Reposição garantida",
+        description: "Somos indústria. O modelo que vendeu bem continua disponível para novos pedidos.",
     },
     {
-        svgPath: <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />,
+        number: "04",
         title: "Indústria em Limeira",
-        description: "Latão de alta fusão e micro zircônia. Peças leves e resistentes, direto da capital da semijoia."
-    }
+        description: "Latão de alta fusão e micro zircônia em peças leves, resistentes e bem construídas.",
+    },
 ];
 
 export default function BenefitsSection() {
-    return (
-        <section className="py-20 px-5 bg-bg-secondary">
-            <div className="max-w-6xl mx-auto">
-                <div className="w-[60px] h-[1px] bg-accent-gold mb-5 mx-auto" />
-                <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-12 text-text-dark">
-                    Por que comprar no <span className="inline-block bg-gradient-to-r from-accent-gold/30 to-accent-gold/20 px-2 py-0.5 rounded font-bold text-accent-gold border border-accent-gold/40">BRUTO</span>?
-                </h2>
+    const [active, setActive] = useState(0);
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {benefits.map((benefit, i) => (
-                        <div key={i} className="flex gap-6 p-8 bg-white rounded-3xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                            <div className="w-12 h-12 bg-gradient-gold rounded-xl flex items-center justify-center flex-shrink-0 text-white">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
-                                    {benefit.svgPath}
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 className="font-serif text-xl md:text-2xl mb-2 text-text-dark font-medium">
-                                    {benefit.title}
-                                </h4>
-                                <p className="text-text-medium text-sm md:text-base leading-relaxed">
-                                    {benefit.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
+    return (
+        <section id="diferenciais" className="bg-[var(--sb-blush)] px-5 py-28 md:py-40">
+            <div className="sb-shell">
+                <div data-reveal className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+                    <div>
+                        <p className="sb-kicker mb-5">Por que comprar no bruto</p>
+                        <h2 className="sb-title max-w-xl">Mais liberdade para criar. Mais espaço para lucrar.</h2>
+                    </div>
+                    <p className="sb-copy max-w-[48ch] lg:justify-self-end lg:pt-4">
+                        Você escolhe o acabamento, constrói a identidade da coleção e mantém o controle da margem.
+                    </p>
+                </div>
+
+                <div data-reveal className="mt-16 flex min-h-[430px] flex-col overflow-hidden border-y border-[var(--sb-line)] lg:flex-row">
+                    {benefits.map((benefit, index) => {
+                        const isActive = active === index;
+                        return (
+                            <button
+                                type="button"
+                                key={benefit.number}
+                                onMouseEnter={() => setActive(index)}
+                                onFocus={() => setActive(index)}
+                                onClick={() => setActive(index)}
+                                className={`relative flex min-h-28 flex-col justify-between border-b border-[var(--sb-line)] p-7 text-left transition-[flex,background-color] duration-500 last:border-0 lg:min-h-0 lg:border-b-0 lg:border-r ${
+                                    isActive ? "bg-[var(--sb-ivory)] lg:flex-[2.2]" : "lg:flex-1"
+                                }`}
+                                aria-expanded={isActive}
+                            >
+                                <span className="text-xs font-bold tracking-[0.18em] text-[var(--sb-clay)]">{benefit.number}</span>
+                                <div className="mt-8">
+                                    <h3 className="font-serif text-3xl font-semibold leading-none text-[var(--sb-cocoa)] lg:text-4xl">{benefit.title}</h3>
+                                    <p className={`mt-5 max-w-sm overflow-hidden text-base leading-relaxed text-[var(--sb-ink-soft)] transition-all duration-500 ${
+                                        isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0 lg:max-h-40 lg:opacity-0"
+                                    }`}>
+                                        {benefit.description}
+                                    </p>
+                                </div>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
         </section>

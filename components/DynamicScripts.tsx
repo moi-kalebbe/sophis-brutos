@@ -20,6 +20,13 @@ export default function DynamicScripts() {
 
     useEffect(() => {
         async function fetchSettings() {
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+            const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+            if (!supabaseUrl || !supabaseAnonKey) {
+                return;
+            }
+
             const supabase = createClient();
             const { data } = await supabase.from("settings").select("*").single();
             if (data) {
@@ -97,8 +104,11 @@ function ScrollTracker() {
             if (fired) return;
             const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
             if (scrollPercent > 0.5) {
-                if ((window as any).fbq) {
-                    (window as any).fbq('trackCustom', 'ScrollDepth', { depth: '50%' });
+                const pixelWindow = window as typeof window & {
+                    fbq?: (action: string, event: string, payload: Record<string, string>) => void;
+                };
+                if (pixelWindow.fbq) {
+                    pixelWindow.fbq("trackCustom", "ScrollDepth", { depth: "50%" });
                 }
                 fired = true;
                 window.removeEventListener("scroll", handleScroll);

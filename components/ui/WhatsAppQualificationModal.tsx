@@ -1,7 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface WhatsAppQualificationModalProps {
     isOpen: boolean;
@@ -14,112 +14,118 @@ export default function WhatsAppQualificationModal({
     isOpen,
     onClose,
     onConfirm,
-    source
+    source,
 }: WhatsAppQualificationModalProps) {
-
-    // Prevenir scroll quando modal aberto
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isOpen]);
-
     if (!isOpen) return null;
 
+    return <ModalContent onClose={onClose} onConfirm={onConfirm} source={source} />;
+}
+
+function ModalContent({
+    onClose,
+    onConfirm,
+    source,
+}: Omit<WhatsAppQualificationModalProps, "isOpen">) {
+    const [confirmed, setConfirmed] = useState(false);
+    const [showError, setShowError] = useState(false);
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, []);
+
+    useEffect(() => {
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") onClose();
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [onClose]);
+
+    const continueToWhatsApp = () => {
+        if (!confirmed) {
+            setShowError(true);
+            return;
+        }
+        onConfirm();
+    };
+
     return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 animate-fadeIn">
-            {/* Backdrop com blur */}
-            <div
-                className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+            <button
+                type="button"
+                className="absolute inset-0 cursor-default bg-[var(--sb-cocoa)]/76 backdrop-blur-sm"
                 onClick={onClose}
+                aria-label="Fechar modal"
             />
 
-            {/* Modal */}
-            <div className="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 md:p-10 animate-slideUp overflow-auto max-h-[90vh]">
-                {/* Close button */}
+            <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="qualification-title"
+                className="relative max-h-[92vh] w-full max-w-xl overflow-auto bg-[var(--sb-ivory)] p-6 shadow-[0_35px_100px_rgba(25,12,10,0.35)] md:p-10"
+            >
                 <button
+                    type="button"
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                    className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--sb-line)] text-[var(--sb-ink-soft)] transition hover:bg-[var(--sb-blush)]"
                     aria-label="Fechar"
                 >
-                    <X className="w-6 h-6" />
+                    <X className="h-5 w-5" />
                 </button>
 
-                {/* Icon */}
-                <div className="flex justify-center mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-gold flex items-center justify-center shadow-lg">
-                        <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6 md:w-8 md:h-8">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                        </svg>
-                    </div>
-                </div>
-
-                {/* Título */}
-                <h3 className="font-serif text-xl md:text-3xl font-bold text-center mb-3 md:mb-4 text-text-dark">
-                    Você será redirecionado ao WhatsApp
+                <p className="sb-kicker mb-4 pr-12">Antes de continuar</p>
+                <h3 id="qualification-title" className="max-w-md font-serif text-3xl font-semibold leading-none text-[var(--sb-cocoa)] md:text-4xl">
+                    Você será direcionado ao WhatsApp.
                 </h3>
 
-                <div className="w-12 h-[2px] bg-accent-gold mb-4 md:mb-6 mx-auto" />
-
-                {/* Mensagem de qualificação */}
-                <div className="bg-gradient-to-br from-bg-secondary to-bg-primary p-4 md:p-6 rounded-xl mb-4 md:mb-6 border-2 border-accent-gold/20">
-                    <p className="text-text-medium text-center leading-relaxed mb-2 md:mb-4 text-sm md:text-base">
-                        ⚠️ <strong>Importante:</strong> Nossas peças são vendidas <span className="inline-block bg-gradient-to-r from-accent-gold/30 to-accent-gold/20 px-2 py-0.5 rounded font-bold text-accent-gold">NO BRUTO</span>
+                <div className="my-7 border-y border-[var(--sb-line)] py-6">
+                    <p className="text-base leading-relaxed text-[var(--sb-cocoa)]">
+                        <strong>Nossas peças são vendidas no bruto.</strong>
                     </p>
-                    <p className="text-text-medium text-xs md:text-sm text-center leading-relaxed">
-                        Isso significa que as semijoias <strong>não vêm com banho aplicado</strong>.
-                        Você escolhe o acabamento (ródio, ouro 18k ou prata) e envia as peças para a galvânica de sua confiança. Se preferir, indicamos uma para você.
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--sb-ink-soft)] md:text-base">
+                        Isso significa que as semijoias não vêm com banho aplicado. Você escolhe o acabamento, ródio, ouro 18k ou prata, e envia as peças para a galvânica de sua confiança. Se preferir, indicamos uma para você.
                     </p>
                 </div>
 
-                {/* Checkbox de concordância */}
-                <div className="flex items-start gap-3 mb-4 md:mb-6 p-3 md:p-4 bg-white rounded-lg border border-gray-200">
+                <label className={`flex cursor-pointer items-start gap-4 border p-4 transition ${showError && !confirmed ? "border-[var(--sb-terracotta)] bg-[var(--sb-blush)]" : "border-[var(--sb-line)]"}`}>
                     <input
                         type="checkbox"
-                        id="understand-checkbox"
-                        className="mt-1 w-5 h-5 text-accent-gold border-gray-300 rounded focus:ring-accent-gold"
+                        checked={confirmed}
+                        onChange={(event) => {
+                            setConfirmed(event.target.checked);
+                            setShowError(false);
+                        }}
+                        className="mt-1 h-5 w-5 accent-[var(--sb-terracotta)]"
                     />
-                    <label htmlFor="understand-checkbox" className="text-xs md:text-sm text-text-medium cursor-pointer select-none">
-                        Eu entendo que as peças são <strong>no bruto (sem banho)</strong> e que precisarei aplicar o acabamento desejado.
-                    </label>
-                </div>
+                    <span className="text-sm leading-relaxed text-[var(--sb-ink-soft)]">
+                        Eu entendo que as peças são <strong>no bruto, sem banho</strong>, e que precisarei aplicar o acabamento desejado.
+                    </span>
+                </label>
+                {showError && !confirmed && (
+                    <p className="mt-2 text-sm text-[var(--sb-terracotta)]">Confirme a informação acima para continuar.</p>
+                )}
 
-                {/* Botões */}
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
                     <button
+                        type="button"
                         onClick={onClose}
-                        className="flex-1 py-2 md:py-3 px-6 rounded-full border-2 border-gray-300 text-gray-600 font-semibold text-sm md:text-base hover:bg-gray-50 transition-colors"
+                        className="min-h-12 rounded-full border border-[var(--sb-cocoa)] px-6 text-sm font-semibold text-[var(--sb-cocoa)] transition hover:bg-[var(--sb-blush)]"
                     >
                         Cancelar
                     </button>
                     <button
-                        onClick={() => {
-                            const checkbox = document.getElementById('understand-checkbox') as HTMLInputElement;
-                            if (checkbox?.checked) {
-                                onConfirm();
-                            } else {
-                                // Shake animation se não marcou
-                                checkbox?.parentElement?.classList.add('animate-shake');
-                                setTimeout(() => {
-                                    checkbox?.parentElement?.classList.remove('animate-shake');
-                                }, 500);
-                            }
-                        }}
-                        className="flex-1 py-2 md:py-3 px-6 rounded-full bg-gradient-gold text-white font-bold text-sm md:text-base hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
+                        type="button"
+                        onClick={continueToWhatsApp}
+                        className="min-h-12 rounded-full bg-[var(--sb-cocoa)] px-6 text-sm font-bold text-[var(--sb-ivory)] transition hover:bg-[var(--sb-terracotta)]"
                     >
-                        Concordo e Continuar
+                        Concordo e continuar
                     </button>
                 </div>
 
-                {/* Origem do clique (para debug) */}
-                <p className="text-xs text-gray-400 text-center mt-4">
-                    Origem: {source}
-                </p>
+                <p className="mt-5 text-center text-[0.68rem] text-[var(--sb-ink-soft)]/65">Origem: {source}</p>
             </div>
         </div>
     );

@@ -1,63 +1,73 @@
-
 "use client";
 
-import { Quote } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+
+const testimonials = [
+    {
+        quote: "Depois que conheci a Sophia, passei a comprar no bruto e escolher meu próprio banho. Ganhei mais controle sobre a coleção e minha margem dobrou.",
+        name: "Maria S.",
+        role: "Lojista em SP",
+    },
+    {
+        quote: "A principal diferença para mim é a reposição. Quando uma peça vende bem, eles têm no estoque ou fabricam rápido. Não perco venda.",
+        name: "Roberto A.",
+        role: "Atacadista",
+    },
+    {
+        quote: "As peças são leves e o acabamento do latão é impecável. Minha galvanoplastia sempre elogia a qualidade da fundição.",
+        name: "Carla M.",
+        role: "Marca própria",
+    },
+];
 
 export default function TestimonialsSection() {
+    const [active, setActive] = useState(0);
+    const testimonial = testimonials[active];
+
+    const move = (direction: number) => {
+        setActive((current) => (current + direction + testimonials.length) % testimonials.length);
+    };
+
     return (
-        <section className="py-20 px-5 bg-bg-secondary">
-            <div className="max-w-6xl mx-auto">
-                <div className="w-[60px] h-[1px] bg-accent-gold mb-5 mx-auto" />
-                <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-12 text-text-dark">
-                    O que dizem nossos parceiros
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Testimonial 1 */}
-                    <div className="relative bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                        <div className="absolute top-8 right-8 text-gray-300/30 group-hover:text-gray-400/40 transition-colors duration-300">
-                            <Quote className="w-8 h-8" />
-                        </div>
-                        <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
-                            "Depois que conheci a Sophia, passei a comprar no bruto e escolher meu próprio banho. Ganhei mais controle sobre a coleção e minha margem dobrou."
-                        </p>
-                        <div className="w-12 h-[2px] bg-accent-gold mb-4" />
-                        <div className="flex flex-col">
-                            <span className="font-bold text-text-dark text-base">Maria S.</span>
-                            <span className="text-sm text-text-medium uppercase tracking-wider text-xs">Lojista em SP</span>
-                        </div>
-                    </div>
-
-                    {/* Testimonial 2 */}
-                    <div className="relative bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                        <div className="absolute top-8 right-8 text-gray-300/30 group-hover:text-gray-400/40 transition-colors duration-300">
-                            <Quote className="w-8 h-8" />
-                        </div>
-                        <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
-                            "A principal diferença pra mim é a reposição. Quando uma peça vende bem, eu ligo e eles têm no estoque ou fabricam rápido. Não perco venda."
-                        </p>
-                        <div className="w-12 h-[2px] bg-accent-gold mb-4" />
-                        <div className="flex flex-col">
-                            <span className="font-bold text-text-dark text-base">Roberto A.</span>
-                            <span className="text-sm text-text-medium uppercase tracking-wider text-xs">Atacadista</span>
-                        </div>
-                    </div>
-
-                    {/* Testimonial 3 */}
-                    <div className="relative bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                        <div className="absolute top-8 right-8 text-gray-300/30 group-hover:text-gray-400/40 transition-colors duration-300">
-                            <Quote className="w-8 h-8" />
-                        </div>
-                        <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
-                            "As peças são leves e o acabamento do latão é impecável. Meu banhista sempre elogia a qualidade da fundição. Recomendo demais."
-                        </p>
-                        <div className="w-12 h-[2px] bg-accent-gold mb-4" />
-                        <div className="flex flex-col">
-                            <span className="font-bold text-text-dark text-base">Carla M.</span>
-                            <span className="text-sm text-text-medium uppercase tracking-wider text-xs">Marca Própria</span>
-                        </div>
+        <section className="bg-[var(--sb-blush-deep)] px-5 py-28 md:py-40">
+            <div className="sb-shell grid gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
+                <div data-reveal>
+                    <p className="sb-kicker mb-6">Parcerias que permanecem</p>
+                    <h2 className="sb-title max-w-xl">Quem compra no bruto, ganha escolha.</h2>
+                    <div className="mt-10 flex gap-3">
+                        <button
+                            type="button"
+                            onClick={() => move(-1)}
+                            className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--sb-cocoa)] text-[var(--sb-cocoa)] transition hover:bg-[var(--sb-cocoa)] hover:text-white"
+                            aria-label="Depoimento anterior"
+                        >
+                            <ArrowLeft className="h-5 w-5" />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => move(1)}
+                            className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--sb-cocoa)] text-[var(--sb-cocoa)] transition hover:bg-[var(--sb-cocoa)] hover:text-white"
+                            aria-label="Próximo depoimento"
+                        >
+                            <ArrowRight className="h-5 w-5" />
+                        </button>
                     </div>
                 </div>
+
+                <figure data-reveal className="relative border-l border-[var(--sb-cocoa)]/20 pl-8 md:pl-14">
+                    <Quote className="mb-8 h-9 w-9 text-[var(--sb-terracotta)]" strokeWidth={1.4} />
+                    <blockquote className="max-w-4xl font-serif text-3xl font-medium leading-[1.14] text-[var(--sb-cocoa)] md:text-5xl">
+                        “{testimonial.quote}”
+                    </blockquote>
+                    <figcaption className="mt-10 flex items-center gap-4">
+                        <span className="h-px w-10 bg-[var(--sb-terracotta)]" />
+                        <span>
+                            <strong className="block text-sm uppercase tracking-[0.12em]">{testimonial.name}</strong>
+                            <span className="mt-1 block text-sm text-[var(--sb-ink-soft)]">{testimonial.role}</span>
+                        </span>
+                    </figcaption>
+                </figure>
             </div>
         </section>
     );
