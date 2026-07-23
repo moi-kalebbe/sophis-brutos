@@ -73,7 +73,7 @@ export default function WhatsAppQualificationModal({
                     </p>
                     <p className="text-text-medium text-xs md:text-sm text-center leading-relaxed">
                         Isso significa que as semijoias <strong>não vêm com banho aplicado</strong>.
-                        Você escolhe o acabamento (ródio, ouro 18k, prata) e aplica com seu banhista de confiança.
+                        Você escolhe o acabamento (ródio, ouro 18k ou prata) e envia as peças para a galvânica de sua confiança. Se preferir, indicamos uma para você.
                     </p>
                 </div>
 

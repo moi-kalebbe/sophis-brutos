@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
                             <Quote className="w-8 h-8" />
                         </div>
                         <p className="italic text-text-gray-600 mb-8 relative z-10 text-base md:text-lg leading-relaxed font-serif">
-                            "Abandonei o folheado pronto depois que conheci a Sophia. Compro no bruto, dou meu banho e minha margem dobrou. A peça sai muito mais em conta."
+                            "Depois que conheci a Sophia, passei a comprar no bruto e escolher meu próprio banho. Ganhei mais controle sobre a coleção e minha margem dobrou."
                         </p>
                         <div className="w-12 h-[2px] bg-accent-gold mb-4" />
                         <div className="flex flex-col">

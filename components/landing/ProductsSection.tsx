@@ -32,7 +32,7 @@ export default function ProductsSection() {
                 <h2 className="font-serif text-3xl md:text-4xl font-semibold text-center mb-3 text-text-dark">
                     Peças vendáveis o ano todo (atemporais)
                 </h2>
-                <p className="text-center text-text-medium mb-12">Mix pronto para lojista — do básico ao destaque</p>
+                <p className="text-center text-text-medium mb-12">Mix pronto para lojista, do básico ao destaque.</p>
 
                 <div className="grid grid-cols-2 gap-6 md:gap-10 mb-12">
                     {products.map((product, index) => (
