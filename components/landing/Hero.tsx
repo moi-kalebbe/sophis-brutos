@@ -91,7 +91,7 @@ export default function Hero() {
 
                     <button
                         onClick={() => openQualificationModal("Botão Principal (Topo)")}
-                        className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full bg-gradient-gold px-7 py-4 text-sm font-bold uppercase tracking-[0.1em] text-white shadow-[0_14px_34px_rgba(116,73,44,0.24)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(116,73,44,0.30)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9f6e3d] focus-visible:ring-offset-4 focus-visible:ring-offset-[#efd5dc] active:translate-y-0 sm:w-auto md:px-10 md:py-5 md:text-base"
+                        className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full border border-[#3f282d] bg-[#3f282d] px-7 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[#fffaf6] shadow-[0_16px_38px_rgba(63,40,45,0.28)] transition duration-300 hover:-translate-y-1 hover:border-[#6b3e49] hover:bg-[#6b3e49] hover:shadow-[0_22px_48px_rgba(63,40,45,0.34)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b3e49] focus-visible:ring-offset-4 focus-visible:ring-offset-[#efd5dc] active:translate-y-0 sm:w-auto md:px-10 md:py-5 md:text-base"
                     >
                         <svg
                             viewBox="0 0 24 24"
