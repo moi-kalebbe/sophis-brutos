@@ -32,6 +32,12 @@ export default function Footer() {
                             sizes="176px"
                             className="object-contain object-left brightness-0 invert md:object-right"
                         />
+                        <span
+                            aria-hidden="true"
+                            className="absolute right-0 top-0 text-[0.62rem] font-semibold text-[var(--sb-champagne)]"
+                        >
+                            ®
+                        </span>
                     </div>
                 </div>
             </div>

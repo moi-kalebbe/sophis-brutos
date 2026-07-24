@@ -37,8 +37,14 @@ export default function Footer() {
                             alt="Sophia Brutos Link"
                             fill
                             sizes="180px"
-                            className="object-contain object-right"
+                            className="object-contain object-right brightness-0 invert"
                         />
+                        <span
+                            aria-hidden="true"
+                            className="absolute right-0 top-0 text-[0.62rem] font-semibold text-white"
+                        >
+                            ®
+                        </span>
                     </div>
                     <p className="text-xs opacity-50 text-center md:text-right mt-auto">
                         © 2026 Sophia Brutos.<br />Todos os direitos reservados.
