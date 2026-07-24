@@ -11,7 +11,7 @@ export default function Footer() {
                         <span className="font-serif text-2xl">Limeira/SP</span>
                     </div>
                     <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-                        Capital das semijoias. Lojas no Shopping Boulevard e na Avenida Costa e Silva.
+                        Capital das semijoias. Lojas no Shopping Boulevard e na Loja da Fábrica.
                     </p>
                 </div>
 

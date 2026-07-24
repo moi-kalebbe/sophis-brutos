@@ -16,7 +16,7 @@ export default function Footer() {
                     <p className="text-sm opacity-80 font-light">
                         Capital das Semijoias<br />
                         Duas lojas físicas:<br />
-                        Shopping Boulevard e Costa e Silva
+                        Shopping Boulevard e Loja da Fábrica
                     </p>
                 </div>
 
