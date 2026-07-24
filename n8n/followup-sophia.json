@@ -1,15 +1,9 @@
 {
   "name": "🟩SOPHIA BRUTOS | FOLLOW-UP",
-  "settings": {
-    "executionOrder": "v1",
-    "timezone": "America/Sao_Paulo",
-    "saveDataErrorExecution": "all",
-    "saveDataSuccessExecution": "all"
-  },
   "nodes": [
     {
       "parameters": {
-        "content": "## FOLLOW-UP AUTOMÁTICO\n\nVarre a fila `followups` (banco SOPHIA) a cada 15 min e cobra leads que pararam de responder.\n\n**Cadência:** 24h → 3 dias → 7 dias, e encerra.\n\nO agendamento e o cancelamento acontecem no fluxo do bot (nó `AGENDA FOLLOW-UP`), via a função SQL `agendar_followup`. Se o cliente responde, o pendente é cancelado automaticamente.\n\n**Para pausar tudo:** desative este workflow. Nada se perde, a fila só para de ser consumida.",
+        "content": "## FOLLOW-UP AUTOMÁTICO\n\nVarre a fila `followups` (banco SOPHIA) a cada 15 min e cobra leads que pararam de responder.\n\n**Cadência:** 24h → 3 dias → 7 dias, e encerra.\n\n**Janela:** seg a sex, 09h às 17h. O expediente da loja é seg-qui até 18h, sex até 17h, e não abre sábado.\n\nO agendamento e o cancelamento acontecem no fluxo do bot (nó `AGENDA FOLLOW-UP`), via a função SQL `agendar_followup`. Se o cliente responde, o pendente é cancelado automaticamente.\n\n**Para pausar tudo:** desative este workflow. Nada se perde, a fila só para de ser consumida.",
         "height": 380,
         "width": 420,
         "color": 4
@@ -18,7 +12,10 @@
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
-      "position": [-380, -80]
+      "position": [
+        -380,
+        -80
+      ]
     },
     {
       "parameters": {
@@ -35,7 +32,10 @@
       "name": "A cada 15 min",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [80, 120]
+      "position": [
+        80,
+        120
+      ]
     },
     {
       "parameters": {
@@ -59,7 +59,7 @@
             {
               "id": "c1000000-0000-4000-8000-000000000002",
               "leftValue": "={{ $now.setZone('America/Sao_Paulo').hour }}",
-              "rightValue": 19,
+              "rightValue": 17,
               "operator": {
                 "type": "number",
                 "operation": "lt"
@@ -68,7 +68,7 @@
             {
               "id": "c1000000-0000-4000-8000-000000000003",
               "leftValue": "={{ $now.setZone('America/Sao_Paulo').weekday }}",
-              "rightValue": 6,
+              "rightValue": 5,
               "operator": {
                 "type": "number",
                 "operation": "lte"
@@ -83,7 +83,10 @@
       "name": "JANELA COMERCIAL?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [300, 120]
+      "position": [
+        300,
+        120
+      ]
     },
     {
       "parameters": {},
@@ -91,7 +94,10 @@
       "name": "Fora de horário",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
-      "position": [520, 280]
+      "position": [
+        520,
+        280
+      ]
     },
     {
       "parameters": {
@@ -123,7 +129,10 @@
       "name": "config",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [520, 100]
+      "position": [
+        520,
+        100
+      ]
     },
     {
       "parameters": {
@@ -140,7 +149,10 @@
       "name": "BUSCA FOLLOW-UPS DEVIDOS",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [740, 100],
+      "position": [
+        740,
+        100
+      ],
       "credentials": {
         "supabaseApi": {
           "id": "Sht5NVKUj5bjqPBd",
@@ -158,7 +170,10 @@
       "name": "Um lead por vez",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
-      "position": [960, 100]
+      "position": [
+        960,
+        100
+      ]
     },
     {
       "parameters": {},
@@ -166,7 +181,10 @@
       "name": "Fim do lote",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
-      "position": [1180, -60]
+      "position": [
+        1180,
+        -60
+      ]
     },
     {
       "parameters": {
@@ -185,7 +203,10 @@
       "name": "ESCREVE FOLLOW-UP",
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
-      "position": [1180, 140]
+      "position": [
+        1180,
+        140
+      ]
     },
     {
       "parameters": {
@@ -204,7 +225,10 @@
       "name": "IA FOLLOW-UP",
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
-      "position": [1200, 340],
+      "position": [
+        1200,
+        340
+      ],
       "credentials": {
         "openAiApi": {
           "id": "9slmJqKnaaYD8fyE",
@@ -221,7 +245,10 @@
       "name": "Jitter anti-spam",
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
-      "position": [1440, 140],
+      "position": [
+        1440,
+        140
+      ],
       "webhookId": "b0000000-0000-4000-8000-00000000000b"
     },
     {
@@ -238,7 +265,10 @@
       "name": "ENVIA FOLLOW-UP",
       "type": "n8n-nodes-evolution-api.evolutionApi",
       "typeVersion": 1,
-      "position": [1660, 140],
+      "position": [
+        1660,
+        140
+      ],
       "onError": "continueErrorOutput",
       "credentials": {
         "evolutionApi": {
@@ -279,7 +309,10 @@
       "name": "REGISTRA NO Log_think",
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
-      "position": [1880, 40],
+      "position": [
+        1880,
+        40
+      ],
       "onError": "continueRegularOutput",
       "credentials": {
         "supabaseApi": {
@@ -303,7 +336,10 @@
       "name": "CONCLUI E AGENDA PRÓXIMA ETAPA",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2100, 40],
+      "position": [
+        2100,
+        40
+      ],
       "credentials": {
         "supabaseApi": {
           "id": "Sht5NVKUj5bjqPBd",
@@ -326,7 +362,10 @@
       "name": "MARCA ERRO",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1880, 300],
+      "position": [
+        1880,
+        300
+      ],
       "onError": "continueRegularOutput",
       "credentials": {
         "supabaseApi": {
@@ -338,49 +377,165 @@
   ],
   "connections": {
     "A cada 15 min": {
-      "main": [[{ "node": "JANELA COMERCIAL?", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "JANELA COMERCIAL?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "JANELA COMERCIAL?": {
       "main": [
-        [{ "node": "config", "type": "main", "index": 0 }],
-        [{ "node": "Fora de horário", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "config",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fora de horário",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "config": {
-      "main": [[{ "node": "BUSCA FOLLOW-UPS DEVIDOS", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "BUSCA FOLLOW-UPS DEVIDOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "BUSCA FOLLOW-UPS DEVIDOS": {
-      "main": [[{ "node": "Um lead por vez", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Um lead por vez",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Um lead por vez": {
       "main": [
-        [{ "node": "Fim do lote", "type": "main", "index": 0 }],
-        [{ "node": "ESCREVE FOLLOW-UP", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Fim do lote",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ESCREVE FOLLOW-UP",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "ESCREVE FOLLOW-UP": {
-      "main": [[{ "node": "Jitter anti-spam", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Jitter anti-spam",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "IA FOLLOW-UP": {
-      "ai_languageModel": [[{ "node": "ESCREVE FOLLOW-UP", "type": "ai_languageModel", "index": 0 }]]
+      "ai_languageModel": [
+        [
+          {
+            "node": "ESCREVE FOLLOW-UP",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Jitter anti-spam": {
-      "main": [[{ "node": "ENVIA FOLLOW-UP", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "ENVIA FOLLOW-UP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "ENVIA FOLLOW-UP": {
       "main": [
-        [{ "node": "REGISTRA NO Log_think", "type": "main", "index": 0 }],
-        [{ "node": "MARCA ERRO", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "REGISTRA NO Log_think",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "MARCA ERRO",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "REGISTRA NO Log_think": {
-      "main": [[{ "node": "CONCLUI E AGENDA PRÓXIMA ETAPA", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "CONCLUI E AGENDA PRÓXIMA ETAPA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "CONCLUI E AGENDA PRÓXIMA ETAPA": {
-      "main": [[{ "node": "Um lead por vez", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Um lead por vez",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "MARCA ERRO": {
-      "main": [[{ "node": "Um lead por vez", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Um lead por vez",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Sao_Paulo",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
   }
 }

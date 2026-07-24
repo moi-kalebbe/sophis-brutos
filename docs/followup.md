@@ -33,7 +33,9 @@ O bot, ao fim de cada resposta enviada, chama `agendar_followup(telefone, nome)`
 2. **não agenda** se `Clientes.iaAtiva = false` (a vendedora assumiu a conversa);
 3. **agenda** a etapa 1 para daqui 24h.
 
-O workflow de follow-up roda a cada 15 min, só em horário comercial (seg–sáb, 09h–19h BRT).
+O workflow de follow-up roda a cada 15 min, só em horário comercial: **seg a sex, 09h–17h BRT**.
+A loja atende seg–qui até 18h, sex até 17h, e **não abre sábado** — a janela 09h–17h cabe dentro
+do expediente em qualquer dia útil, sem precisar de regra por dia da semana.
 Ele reserva as linhas devidas com `FOR UPDATE SKIP LOCKED` — é isso que impede envio duplicado
 se duas execuções do cron se sobrepuserem. Depois gera a mensagem com IA usando o `long_memory`
 do lead, espera de 20 a 45s (jitter anti-spam), envia, grava no `Log_think` e agenda a próxima etapa.
