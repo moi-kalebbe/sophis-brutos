@@ -26,6 +26,12 @@ export default function Header() {
                             className="object-contain object-left"
                             priority
                         />
+                        <span
+                            aria-hidden="true"
+                            className="absolute right-0 top-0 text-[0.58rem] font-semibold text-[var(--sb-cocoa)] sm:text-[0.65rem]"
+                        >
+                            ®
+                        </span>
                     </a>
 
                     <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">

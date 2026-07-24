@@ -29,7 +29,7 @@ export default function FinalCTA() {
                     onClick={() => openQualificationModal("Botão Final (Rodapé)")}
                     className="mt-10 inline-flex min-h-16 items-center justify-center rounded-full bg-[var(--sb-cocoa)] px-8 text-xs font-bold uppercase tracking-[0.14em] text-[var(--sb-ivory)] shadow-[0_20px_50px_rgba(52,33,30,0.24)] transition hover:-translate-y-1 hover:bg-[var(--sb-ivory)] hover:text-[var(--sb-cocoa)] md:px-12 md:text-sm"
                 >
-                    Quero catálogo + tabela do bruto
+                    VER CATÁLOGO
                 </button>
             </div>
 

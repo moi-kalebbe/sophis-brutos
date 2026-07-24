@@ -69,7 +69,7 @@ export default function Hero() {
                             className="sb-primary"
                         >
                             <WhatsappIcon />
-                            Quero catálogo + tabela do bruto
+                            VER CATÁLOGO
                         </button>
                         <a href="#industria" className="sb-link text-center sm:text-left">Conhecer a indústria</a>
                     </div>
