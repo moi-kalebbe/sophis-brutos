@@ -33,6 +33,7 @@ export default function Hero() {
                 <div data-media-reveal className="relative mx-auto w-full max-w-[350px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-[390px]">
                     <div aria-hidden="true" className="absolute -inset-4 rounded-[2.4rem] border border-white/50" />
                     <EditorialVideoPlayer
+                        priority
                         src="/videos/envio-brasil.mp4"
                         poster="/videos/envio-brasil-poster.webp"
                         ariaLabel="Vídeo sobre os envios da Sophia Brutos para todo o Brasil"

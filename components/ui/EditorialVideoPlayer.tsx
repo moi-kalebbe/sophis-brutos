@@ -8,6 +8,14 @@ interface EditorialVideoPlayerProps {
     ariaLabel: string;
     badge: string;
     className?: string;
+    /**
+     * Marque como `true` no player que aparece acima da dobra.
+     *
+     * O poster de um `<video>` não é descoberto pelo pré-scanner do navegador,
+     * então ele entra tarde na fila e vira o gargalo da LCP. O preload declarado
+     * aqui é içado para o `<head>` pelo React e resolve isso.
+     */
+    priority?: boolean;
 }
 
 export default function EditorialVideoPlayer({
@@ -16,6 +24,7 @@ export default function EditorialVideoPlayer({
     ariaLabel,
     badge,
     className = "",
+    priority = false,
 }: EditorialVideoPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [hasStarted, setHasStarted] = useState(false);
@@ -36,6 +45,9 @@ export default function EditorialVideoPlayer({
 
     return (
         <div className={`group relative aspect-[9/16] overflow-hidden rounded-[1.8rem] ${className}`}>
+            {priority && (
+                <link rel="preload" as="image" href={poster} fetchPriority="high" />
+            )}
             <video
                 ref={videoRef}
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"

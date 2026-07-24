@@ -29,7 +29,7 @@ modelos leves, atemporais e de boa saída para revenda, e não peças de modinha
 - Pedido mínimo: 5 peças por modelo, com variedade livre de modelos.
 - Envio para todo o Brasil, via Correios ou transportadora.
 - Nota fiscal em toda compra, com CPF ou CNPJ.
-- Catálogo online: https://app.conectavenda.com.br/8267e2cda86b6e94e639434a6cee993c/
+- [Catálogo online](https://app.conectavenda.com.br/8267e2cda86b6e94e639434a6cee993c/): todos os modelos disponíveis, com fotos e referências.
 
 ## Onde ficamos
 
@@ -68,5 +68,7 @@ banho será dada por você ou pela sua galvanoplastia.
 
 ## Links
 
-- Site: https://sophiabrutos.com.br
-- Catálogo: https://app.conectavenda.com.br/8267e2cda86b6e94e639434a6cee993c/
+- [Site oficial](https://sophiabrutos.com.br): quem somos, produtos, fábrica e perguntas frequentes.
+- [Catálogo de peças](https://app.conectavenda.com.br/8267e2cda86b6e94e639434a6cee993c/): modelos disponíveis para atacado, com busca por categoria, tamanho e referência.
+- [Busca no catálogo](https://app.conectavenda.com.br/8267e2cda86b6e94e639434a6cee993c/pesquisa?busca=colar): exemplo de busca por termo, útil para localizar uma peça específica.
+- [robots.txt](https://sophiabrutos.com.br/robots.txt): política de rastreamento do site.

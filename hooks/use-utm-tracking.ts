@@ -1,8 +1,6 @@
 
 "use client";
 
-import { useMemo } from "react";
-import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 interface UTMParams {
@@ -13,17 +11,29 @@ interface UTMParams {
     utm_content: string | null;
 }
 
-export function useUTMTracking() {
-    const searchParams = useSearchParams();
-    const utms = useMemo<UTMParams>(() => ({
-        utm_source: searchParams.get("utm_source"),
-        utm_medium: searchParams.get("utm_medium"),
-        utm_campaign: searchParams.get("utm_campaign"),
-        utm_term: searchParams.get("utm_term"),
-        utm_content: searchParams.get("utm_content"),
-    }), [searchParams]);
+/**
+ * Lê as UTMs da URL no momento do clique.
+ *
+ * Antes isso vinha de `useSearchParams`, que obriga o Next a abortar o
+ * pré-render de todo o Suspense em volta: o hero saía do HTML e só aparecia
+ * depois do JS, o que jogava a LCP para 4s. Como as UTMs só são necessárias
+ * quando o usuário clica, ler da URL aqui dá o mesmo resultado e devolve o
+ * hero ao HTML inicial.
+ */
+function lerUTMs(): UTMParams {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        utm_source: params.get("utm_source"),
+        utm_medium: params.get("utm_medium"),
+        utm_campaign: params.get("utm_campaign"),
+        utm_term: params.get("utm_term"),
+        utm_content: params.get("utm_content"),
+    };
+}
 
+export function useUTMTracking() {
     const trackClick = async (location?: string) => {
+        const utms = lerUTMs();
         const userAgent = navigator.userAgent;
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
         const deviceType = isMobile ? "mobile" : "desktop";

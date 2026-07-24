@@ -69,6 +69,7 @@ export default function Hero() {
                         className="absolute -inset-x-3 -inset-y-4 -z-10 rounded-[2.2rem] bg-white/18 blur-[1px]"
                     />
                     <EditorialVideoPlayer
+                        priority
                         src="/videos/envio-brasil.mp4"
                         poster="/videos/envio-brasil-poster.webp"
                         ariaLabel="Vídeo sobre os envios da Sophia Brutos para todo o Brasil"
