@@ -53,12 +53,41 @@ const jsonLd = {
     name: "Sophia Brutos",
     url: "https://sophiabrutos.com.br",
     logo: "https://sophiabrutos.com.br/assets/logo.png",
+    // Endereço da indústria, onde fica a loja da fábrica.
     address: {
         "@type": "PostalAddress",
+        streetAddress: "Rua José Faccioni Filho, 301",
         addressLocality: "Limeira",
         addressRegion: "SP",
+        postalCode: "13487-211",
         addressCountry: "BR",
     },
+    location: [
+        {
+            "@type": "Place",
+            name: "Sophia Brutos | Loja da Fábrica",
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: "Rua José Faccioni Filho, 301",
+                addressLocality: "Limeira",
+                addressRegion: "SP",
+                postalCode: "13487-211",
+                addressCountry: "BR",
+            },
+        },
+        {
+            "@type": "Place",
+            name: "Sophia Brutos | Shopping Boulevard",
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: "Av. Marechal Arthur da Costa e Silva, 795 - Loja 144",
+                addressLocality: "Limeira",
+                addressRegion: "SP",
+                postalCode: "13487-220",
+                addressCountry: "BR",
+            },
+        },
+    ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
