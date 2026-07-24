@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat, Outfit } from "next/font/google";
 import DynamicScripts from "@/components/DynamicScripts";
 import LandingFloatingWhatsApp from "@/components/LandingFloatingWhatsApp";
+import { EMPRESA, SEDE, SITE_URL, enderecoPostal, lojasEstruturadas } from "@/lib/seo/site";
 import "./v2-globals.css";
 
 const outfit = Outfit({
@@ -47,45 +48,43 @@ export const metadata: Metadata = {
     robots: { index: true, follow: true },
 };
 
+/**
+ * Grafo de dados estruturados do site.
+ *
+ * Um único bloco `@graph` com `@id` em cada nó, para que Organization, as lojas
+ * e a página se refiram umas às outras em vez de repetir dados soltos. É o
+ * formato que o Google e os buscadores com IA conseguem ligar melhor.
+ */
 const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Sophia Brutos",
-    url: "https://sophiabrutos.com.br",
-    logo: "https://sophiabrutos.com.br/assets/logo.png",
-    // Endereço da indústria, onde fica a loja da fábrica.
-    address: {
-        "@type": "PostalAddress",
-        streetAddress: "Rua José Faccioni Filho, 301",
-        addressLocality: "Limeira",
-        addressRegion: "SP",
-        postalCode: "13487-211",
-        addressCountry: "BR",
-    },
-    location: [
+    "@graph": [
         {
-            "@type": "Place",
-            name: "Sophia Brutos | Loja da Fábrica",
-            address: {
-                "@type": "PostalAddress",
-                streetAddress: "Rua José Faccioni Filho, 301",
-                addressLocality: "Limeira",
-                addressRegion: "SP",
-                postalCode: "13487-211",
-                addressCountry: "BR",
-            },
+            "@type": "Organization",
+            "@id": `${SITE_URL}/#organizacao`,
+            name: EMPRESA.nome,
+            url: SITE_URL,
+            logo: `${SITE_URL}/assets/logo.png`,
+            image: `${SITE_URL}/opengraph-image.png`,
+            description: EMPRESA.descricaoCurta,
+            foundingDate: EMPRESA.fundacao,
+            telephone: EMPRESA.telefone,
+            address: enderecoPostal(SEDE),
+            areaServed: { "@type": "Country", name: "Brasil" },
+            knowsAbout: [
+                "semijoias no bruto",
+                "atacado de semijoias",
+                "galvanoplastia",
+                "revenda de semijoias",
+            ],
+            location: lojasEstruturadas(),
         },
         {
-            "@type": "Place",
-            name: "Sophia Brutos | Shopping Boulevard",
-            address: {
-                "@type": "PostalAddress",
-                streetAddress: "Av. Marechal Arthur da Costa e Silva, 795 - Loja 144",
-                addressLocality: "Limeira",
-                addressRegion: "SP",
-                postalCode: "13487-220",
-                addressCountry: "BR",
-            },
+            "@type": "WebSite",
+            "@id": `${SITE_URL}/#site`,
+            url: SITE_URL,
+            name: EMPRESA.nome,
+            inLanguage: "pt-BR",
+            publisher: { "@id": `${SITE_URL}/#organizacao` },
         },
     ],
 };
