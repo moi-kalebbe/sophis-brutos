@@ -43,7 +43,14 @@ export const metadata: Metadata = {
         description:
             "Produção própria em Limeira, reposição garantida e envio para todo o Brasil.",
         siteName: "Sophia Brutos",
-        images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Sophia Brutos" }],
+        // A imagem vem de app/opengraph-image.png pela convenção do Next, que
+        // monta a URL com hash de versão. Declarar aqui à mão duplicaria a tag.
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Sophia Brutos | Semijoias no bruto direto da indústria",
+        description:
+            "Produção própria em Limeira, reposição garantida e envio para todo o Brasil.",
     },
     robots: { index: true, follow: true },
 };
@@ -64,7 +71,7 @@ const jsonLd = {
             name: EMPRESA.nome,
             url: SITE_URL,
             logo: `${SITE_URL}/assets/logo.png`,
-            image: `${SITE_URL}/opengraph-image.png`,
+            image: `${SITE_URL}/assets/logo.png`,
             description: EMPRESA.descricaoCurta,
             foundingDate: EMPRESA.fundacao,
             telephone: EMPRESA.telefone,
